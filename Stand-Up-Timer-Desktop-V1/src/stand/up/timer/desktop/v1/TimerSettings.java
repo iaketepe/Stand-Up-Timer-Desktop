@@ -11,8 +11,8 @@ public class TimerSettings {
     Duration breakTime;
     boolean isLoop;
     int volume;
-    String[] StudyBreak = {"Study Time","Break Time"};
-    String sfx = "alarmsfx.mp3";
+    String[] studyBreak = {"Study Time","Break Time"};
+    String sfx = "/alarmsfx.mp3";
     
     public TimerSettings()  {
         this.studyTime = Duration.ofSeconds(10);
@@ -74,14 +74,20 @@ public class TimerSettings {
     
     public void updateLoop() {
         isLoop = !isLoop;
+        System.out.println(isLoop);
     }
     
     public void setVolume(int vol) {
         if(vol > 100) vol = 100;
         else if (vol < 0) vol = 0;
-        volume = vol;
+        else {
+            volume = vol;
+        }
     }
     
+    public String[] getTimeLabel() {
+        return studyBreak;
+    }
     
     public String getSfx() {
         return sfx;

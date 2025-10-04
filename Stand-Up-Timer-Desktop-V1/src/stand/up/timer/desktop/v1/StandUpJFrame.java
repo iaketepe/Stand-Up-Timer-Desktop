@@ -17,7 +17,11 @@ public class StandUpJFrame extends javax.swing.JFrame implements TimerDisplay {
     public StandUpJFrame() {
         initComponents();
         this.timer = new StandUpTimer(this);
+        
+        
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

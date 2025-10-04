@@ -31,17 +31,23 @@ public class StandUpTimer{
         threadholder = new Thread(() -> {
             try {
                 do {
-                    countDownEngine.begin(timerSettings.studyTime,timerSettings.getVolume(),timerSettings.getSfx());
-                    countDownEngine.begin(timerSettings.breakTime,timerSettings.getVolume(),timerSettings.getSfx()); //sfx, ui componets, timer label
+                    countDownEngine.begin(timerSettings.studyTime,timerSettings.getTimeLabel()[0],timerSettings.getVolume(),timerSettings.getSfx());
+                    //Thread.sleep(timerSettings.getStudy().toMillis());
+                    countDownEngine.begin(timerSettings.breakTime,timerSettings.getTimeLabel()[1],timerSettings.getVolume(),timerSettings.getSfx()); //sfx, ui componets, timer label
+                    //Thread.sleep(timerSettings.getBreak().toMillis());
                 } while (timerSettings.isLoop());
             } catch (Exception e) {
                 System.out.println("Thread was Canceled.");
             }
         });
+        
+        threadholder.start();
     }
     
     public void stopTimer() {
-        threadholder.interrupt();
+        if (threadholder != null && threadholder.isAlive()) {
+            threadholder.interrupt();
+        }
     }
     
     public void loopTimer() {
