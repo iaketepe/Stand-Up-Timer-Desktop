@@ -12,7 +12,7 @@ public class TimerSettings {
     boolean isLoop;
     int volume;
     String[] studyBreak = {"Study Time","Break Time"};
-    String sfx = "/alarmsfx.mp3";
+    String sfx = "alarmsfx.wav";
     
     public TimerSettings()  {
         this.studyTime = Duration.ofSeconds(10);
