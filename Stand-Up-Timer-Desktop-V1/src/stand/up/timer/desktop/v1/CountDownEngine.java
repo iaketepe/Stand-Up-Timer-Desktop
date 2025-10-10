@@ -8,7 +8,7 @@ import java.time.Duration;
 
 public class CountDownEngine {
     private final TimerDisplay timerDisplay;
-    //private SoundPlayer SoundPlayer;
+    private SoundPlayer SoundPlayer;
     //private ScheduledExecutorService executor;
     
     public CountDownEngine(TimerDisplay display) {
@@ -18,22 +18,23 @@ public class CountDownEngine {
     //run the timer
     //play the music
     //end thread
-    public void begin(Duration d, String label, int volume, String sfx) {
-        try {
-            long seconds = d.getSeconds();
-            timerDisplay.updateDisplayLabel(label);
-            for (long i = seconds; i >= 0; i--) {
-                // Update display (UI)
-                timerDisplay.updateDisplayVal(formatTime(i));
-                Thread.sleep(1000); // wait 1 second
+    public void begin(Duration d, String label, int volume, String sfx) throws InterruptedException {
+        long seconds = d.getSeconds();
+        timerDisplay.updateDisplayLabel(label);
+        for (long i = seconds; i >= 0; i--) {
+            if(Thread.currentThread().isInterrupted()) {
+                System.out.println("Countdown interrupted");
+                return;
             }
+            // Update display (UI)
+            timerDisplay.updateDisplayVal(formatTime(i));
             // Play sfx after countdown
-            if (sfx != null) {
+            if (sfx != null && i == 0) {
                 SoundPlayer.playSound(sfx);
             }
-        } catch (Exception e) {
-            System.out.println("Countdown interrupted");
+            Thread.sleep(1000); // wait 1 second
         }
+
     }
     
     private String formatTime(long totalSeconds) {

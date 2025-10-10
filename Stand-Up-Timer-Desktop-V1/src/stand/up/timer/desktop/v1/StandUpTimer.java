@@ -35,9 +35,12 @@ public class StandUpTimer{
                     //Thread.sleep(timerSettings.getStudy().toMillis());
                     countDownEngine.begin(timerSettings.breakTime,timerSettings.getTimeLabel()[1],timerSettings.getVolume(),timerSettings.getSfx()); //sfx, ui componets, timer label
                     //Thread.sleep(timerSettings.getBreak().toMillis());
-                } while (timerSettings.isLoop());
-            } catch (Exception e) {
+                } while (timerSettings.isLoop() && !Thread.currentThread().isInterrupted());
+            } catch (InterruptedException e) {
+                threadholder.currentThread().interrupt();
                 System.out.println("Thread was Canceled.");
+            } catch (Exception e) {
+                System.out.println("Thread Error: " + e.getMessage());
             }
         });
         
