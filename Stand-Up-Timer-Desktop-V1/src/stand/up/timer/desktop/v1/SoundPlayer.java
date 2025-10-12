@@ -20,6 +20,13 @@ public class SoundPlayer {
                 AudioInputStream audioStream = AudioSystem.getAudioInputStream(bufferedIn);
                 Clip clip = AudioSystem.getClip();
                 clip.open(audioStream);
+                
+                clip.addLineListener(event -> {
+                    if (event.getType() == LineEvent.Type.STOP) {
+                        clip.close();
+                    }
+                });
+                
                 clip.start();
             }
         } catch (Exception e) {

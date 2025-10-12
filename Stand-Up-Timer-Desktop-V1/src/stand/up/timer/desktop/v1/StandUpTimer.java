@@ -16,7 +16,6 @@ public class StandUpTimer{
         this.timerSettings = new TimerSettings();
         //this.timerDisplay = display;
         this.countDownEngine = new CountDownEngine(display);
-        this.threadholder = new Thread();
     }
     
     public StandUpTimer(Duration DurationStudyTime, Duration DurationBreakTime) { // settings we want to import in
