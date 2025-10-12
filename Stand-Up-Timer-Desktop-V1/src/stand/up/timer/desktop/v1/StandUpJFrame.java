@@ -73,7 +73,8 @@ public class StandUpJFrame extends javax.swing.JFrame implements TimerDisplay {
         timerVal.setText("Timer Time");
 
         idLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        idLabel.setText("StudyBreakLabel");
+        idLabel.setText("Stand Up Timer");
+        idLabel.setVerifyInputWhenFocusTarget(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,7 +95,7 @@ public class StandUpJFrame extends javax.swing.JFrame implements TimerDisplay {
                         .addGap(74, 74, 74))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(idLabel)
+                .addComponent(idLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(149, 149, 149))
             .addGroup(layout.createSequentialGroup()
                 .addGap(132, 132, 132)
@@ -107,7 +108,7 @@ public class StandUpJFrame extends javax.swing.JFrame implements TimerDisplay {
                 .addContainerGap()
                 .addComponent(settings)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addComponent(idLabel)
+                .addComponent(idLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(timerVal, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38)

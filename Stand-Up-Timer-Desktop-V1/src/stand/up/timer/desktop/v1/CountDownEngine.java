@@ -24,6 +24,7 @@ public class CountDownEngine {
         for (long i = seconds; i >= 0; i--) {
             if(Thread.currentThread().isInterrupted()) {
                 System.out.println("Countdown interrupted");
+                //timerDisplay.updateDisplayVal(formatTime(i));
                 return;
             }
             // Update display (UI)

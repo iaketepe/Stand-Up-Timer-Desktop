@@ -30,6 +30,7 @@ public class StandUpTimer{
     public synchronized void startTimer() {
         if(threadholder == null || !threadholder.isAlive()) {
             threadholder = new Thread(() -> {
+                //System.out.println("Active threads: " + threadholder.activeCount());
                 try {
                     do {
                         countDownEngine.begin(timerSettings.studyTime,timerSettings.getTimeLabel()[0],timerSettings.getVolume(),timerSettings.getSfx());
