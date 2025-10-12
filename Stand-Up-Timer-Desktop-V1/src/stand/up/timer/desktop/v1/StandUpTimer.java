@@ -16,6 +16,7 @@ public class StandUpTimer{
         this.timerSettings = new TimerSettings();
         //this.timerDisplay = display;
         this.countDownEngine = new CountDownEngine(display);
+        this.threadholder = new Thread();
     }
     
     public StandUpTimer(Duration DurationStudyTime, Duration DurationBreakTime) { // settings we want to import in
@@ -27,27 +28,30 @@ public class StandUpTimer{
     }
     
     
-    public void startTimer() {
-        threadholder = new Thread(() -> {
-            try {
-                do {
-                    countDownEngine.begin(timerSettings.studyTime,timerSettings.getTimeLabel()[0],timerSettings.getVolume(),timerSettings.getSfx());
-                    //Thread.sleep(timerSettings.getStudy().toMillis());
-                    countDownEngine.begin(timerSettings.breakTime,timerSettings.getTimeLabel()[1],timerSettings.getVolume(),timerSettings.getSfx()); //sfx, ui componets, timer label
-                    //Thread.sleep(timerSettings.getBreak().toMillis());
-                } while (timerSettings.isLoop() && !Thread.currentThread().isInterrupted());
-            } catch (InterruptedException e) {
-                threadholder.currentThread().interrupt();
-                System.out.println("Thread was Canceled.");
-            } catch (Exception e) {
-                System.out.println("Thread Error: " + e.getMessage());
-            }
-        });
+    public synchronized void startTimer() {
+        if(threadholder == null || !threadholder.isAlive()) {
+            threadholder = new Thread(() -> {
+                try {
+                    do {
+                        countDownEngine.begin(timerSettings.studyTime,timerSettings.getTimeLabel()[0],timerSettings.getVolume(),timerSettings.getSfx());
+                        //Thread.sleep(timerSettings.getStudy().toMillis());
+                        countDownEngine.begin(timerSettings.breakTime,timerSettings.getTimeLabel()[1],timerSettings.getVolume(),timerSettings.getSfx()); //sfx, ui componets, timer label
+                        //Thread.sleep(timerSettings.getBreak().toMillis());
+                    } while (timerSettings.isLoop() && !Thread.currentThread().isInterrupted());
+                } catch (InterruptedException e) {
+                    //threadholder.currentThread().interrupt();
+                    System.out.println("Thread was Canceled.");
+                } catch (Exception e) {
+                    System.out.println("Thread Error: " + e.getMessage());
+                }
+            });
+            threadholder.start();
+        }
         
-        threadholder.start();
+        
     }
     
-    public void stopTimer() {
+    public synchronized void stopTimer() {
         if (threadholder != null && threadholder.isAlive()) {
             threadholder.interrupt();
         }
