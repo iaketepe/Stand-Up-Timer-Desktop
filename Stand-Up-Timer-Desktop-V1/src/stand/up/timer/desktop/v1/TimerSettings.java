@@ -15,8 +15,8 @@ public class TimerSettings {
     String sfx = "alarmsfx.wav";
     
     public TimerSettings()  {
-        this.studyTime = Duration.ofSeconds(10);
-        this.breakTime = Duration.ofSeconds(10);
+        this.studyTime = Duration.ofMinutes(25); //10
+        this.breakTime = Duration.ofSeconds(25);
         isLoop = false;
         volume = 50;
     }

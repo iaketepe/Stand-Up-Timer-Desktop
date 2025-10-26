@@ -5,18 +5,39 @@
  */
 package stand.up.timer.desktop.v1;
 //import java.util.Timer;
+import java.awt.CardLayout;
+import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class StandUpJFrame extends javax.swing.JFrame implements TimerDisplay {
+public class StandUpJFrame extends javax.swing.JFrame {
     
-    public StandUpTimer timer;
+    private CardLayout cardLayout;
+    private JPanel cards;
+    private HomePanel homePanel;
+    private SettingsPanel settingsPanel;
     /**
      * Creates new form StandUpJFrame
      */
     
     public StandUpJFrame() {
-        initComponents();
-        this.timer = new StandUpTimer(this);
+        //initComponents();
+        homePanel = new HomePanel();
+        settingsPanel = new SettingsPanel();
+        
+        cardLayout = new CardLayout();
+        cards = new JPanel(cardLayout);
+        
+        cards.add(homePanel, "home");
+        cards.add(settingsPanel, "settings");
+        
+        getContentPane().removeAll();
+        getContentPane().add(cards);
+        pack();
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setVisible(true);
+        
+        cardLayout.show(cards, "home");
         
         
     }
@@ -32,113 +53,11 @@ public class StandUpJFrame extends javax.swing.JFrame implements TimerDisplay {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        stop = new javax.swing.JButton();
-        start = new javax.swing.JButton();
-        loop = new javax.swing.JToggleButton();
-        settings = new javax.swing.JButton();
-        timerVal = new javax.swing.JLabel();
-        idLabel = new javax.swing.JLabel();
-
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        stop.setText("Stop");
-        stop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stopActionPerformed(evt);
-            }
-        });
-
-        start.setText("Start");
-        start.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                startActionPerformed(evt);
-            }
-        });
-
-        loop.setText("Loop");
-        loop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loopActionPerformed(evt);
-            }
-        });
-
-        settings.setText("Settings");
-        settings.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                settingsActionPerformed(evt);
-            }
-        });
-
-        timerVal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        timerVal.setText("Timer Time");
-
-        idLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        idLabel.setText("Stand Up Timer");
-        idLabel.setVerifyInputWhenFocusTarget(false);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(start)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(settings)
-                            .addComponent(loop))
-                        .addGap(11, 11, 11))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(stop)
-                        .addGap(74, 74, 74))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(idLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(149, 149, 149))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(132, 132, 132)
-                .addComponent(timerVal, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(132, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(settings)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addComponent(idLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(timerVal, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(stop)
-                    .addComponent(start))
-                .addGap(32, 32, 32)
-                .addComponent(loop)
-                .addGap(14, 14, 14))
-        );
+        getContentPane().setLayout(new java.awt.CardLayout());
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
-        timer.startTimer();
-    }//GEN-LAST:event_startActionPerformed
-
-    private void loopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loopActionPerformed
-        timer.loopTimer();
-    }//GEN-LAST:event_loopActionPerformed
-
-    private void settingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsActionPerformed
-        // TODO add your handling code here:
-        //pop up into TimerSettings changes
-    }//GEN-LAST:event_settingsActionPerformed
-
-    private void stopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopActionPerformed
-        timer.stopTimer();
-    }//GEN-LAST:event_stopActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,24 +93,8 @@ public class StandUpJFrame extends javax.swing.JFrame implements TimerDisplay {
             }
         });
     }
-    
-    @Override
-    public void updateDisplayVal(String text) {
-        SwingUtilities.invokeLater(() -> timerVal.setText(text));
-    }
-
-    @Override
-    public void updateDisplayLabel(String text) {
-        SwingUtilities.invokeLater(() -> idLabel.setText(text));
-    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel idLabel;
-    private javax.swing.JToggleButton loop;
-    private javax.swing.JButton settings;
-    private javax.swing.JButton start;
-    private javax.swing.JButton stop;
-    private javax.swing.JLabel timerVal;
     // End of variables declaration//GEN-END:variables
 }
