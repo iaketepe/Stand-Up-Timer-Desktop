@@ -14,12 +14,14 @@ import javax.swing.SwingUtilities;
 public class HomePanel extends javax.swing.JPanel implements TimerDisplay {
 
     public StandUpTimer timer;
+    private final CardSwitch cSwitch;
     /**
      * Creates new form HomePanel
      */
-    public HomePanel() {
+    public HomePanel(CardSwitch cs) {
         initComponents();
         this.timer = new StandUpTimer(this);
+        this.cSwitch = cs;
     }
 
     /**
@@ -38,12 +40,15 @@ public class HomePanel extends javax.swing.JPanel implements TimerDisplay {
         timerVal = new javax.swing.JLabel();
         idLabel = new javax.swing.JLabel();
 
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         stop.setText("Stop");
         stop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 stopActionPerformed(evt);
             }
         });
+        add(stop, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 190, -1, -1));
 
         start.setText("Start");
         start.addActionListener(new java.awt.event.ActionListener() {
@@ -51,6 +56,7 @@ public class HomePanel extends javax.swing.JPanel implements TimerDisplay {
                 startActionPerformed(evt);
             }
         });
+        add(start, new org.netbeans.lib.awtextra.AbsoluteConstraints(62, 190, -1, -1));
 
         loop.setText("Loop");
         loop.addActionListener(new java.awt.event.ActionListener() {
@@ -58,6 +64,7 @@ public class HomePanel extends javax.swing.JPanel implements TimerDisplay {
                 loopActionPerformed(evt);
             }
         });
+        add(loop, new org.netbeans.lib.awtextra.AbsoluteConstraints(331, 254, -1, -1));
 
         settings.setText("Settings");
         settings.addActionListener(new java.awt.event.ActionListener() {
@@ -65,57 +72,16 @@ public class HomePanel extends javax.swing.JPanel implements TimerDisplay {
                 settingsActionPerformed(evt);
             }
         });
+        add(settings, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 6, -1, -1));
 
         timerVal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         timerVal.setText("Timer Time");
+        add(timerVal, new org.netbeans.lib.awtextra.AbsoluteConstraints(132, 121, 136, 31));
 
         idLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         idLabel.setText("Stand Up Timer");
         idLabel.setVerifyInputWhenFocusTarget(false);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(62, 62, 62)
-                .addComponent(start)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(settings)
-                            .addComponent(loop))
-                        .addGap(11, 11, 11))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(stop)
-                        .addGap(74, 74, 74))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(idLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(149, 149, 149))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(132, 132, 132)
-                .addComponent(timerVal, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(132, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(settings)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
-                .addComponent(idLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(timerVal, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(stop)
-                    .addComponent(start))
-                .addGap(32, 32, 32)
-                .addComponent(loop)
-                .addGap(14, 14, 14))
-        );
+        add(idLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 87, 97, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void stopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopActionPerformed
@@ -131,8 +97,7 @@ public class HomePanel extends javax.swing.JPanel implements TimerDisplay {
     }//GEN-LAST:event_loopActionPerformed
 
     private void settingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingsActionPerformed
-        // TODO add your handling code here:
-        //pop up into TimerSettings changes
+        cSwitch.showPanel("settings");
     }//GEN-LAST:event_settingsActionPerformed
 
 

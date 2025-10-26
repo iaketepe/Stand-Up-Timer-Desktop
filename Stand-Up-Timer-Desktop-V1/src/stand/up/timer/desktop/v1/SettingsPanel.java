@@ -11,11 +11,13 @@ package stand.up.timer.desktop.v1;
  */
 public class SettingsPanel extends javax.swing.JPanel {
 
+    private CardSwitch cSwitch;
     /**
      * Creates new form SettingsPanel
      */
-    public SettingsPanel() {
+    public SettingsPanel(CardSwitch cs) {
         initComponents();
+        this.cSwitch = cs;
     }
 
     /**
@@ -27,17 +29,26 @@ public class SettingsPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        back = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("jButton1");
-        jButton1.setVerifyInputWhenFocusTarget(false);
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 80, -1, -1));
+        back.setText("Back");
+        back.setVerifyInputWhenFocusTarget(false);
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
+        add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 6, 77, 32));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        cSwitch.showPanel("home");
+    }//GEN-LAST:event_backActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton back;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,10 +6,11 @@
 package stand.up.timer.desktop.v1;
 //import java.util.Timer;
 import java.awt.CardLayout;
+import java.awt.Dimension;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-public class StandUpJFrame extends javax.swing.JFrame {
+public class StandUpJFrame extends javax.swing.JFrame implements CardSwitch {
     
     private CardLayout cardLayout;
     private JPanel cards;
@@ -21,8 +22,8 @@ public class StandUpJFrame extends javax.swing.JFrame {
     
     public StandUpJFrame() {
         //initComponents();
-        homePanel = new HomePanel();
-        settingsPanel = new SettingsPanel();
+        homePanel = new HomePanel(this);
+        settingsPanel = new SettingsPanel(this);
         
         cardLayout = new CardLayout();
         cards = new JPanel(cardLayout);
@@ -31,6 +32,7 @@ public class StandUpJFrame extends javax.swing.JFrame {
         cards.add(settingsPanel, "settings");
         
         getContentPane().removeAll();
+        getContentPane().setPreferredSize(new Dimension(400,300));
         getContentPane().add(cards);
         pack();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -92,6 +94,11 @@ public class StandUpJFrame extends javax.swing.JFrame {
                 new StandUpJFrame().setVisible(true);
             }
         });
+    }
+
+    @Override
+    public void showPanel(String panelName) {
+        cardLayout.show(cards, panelName);
     }
 
 
