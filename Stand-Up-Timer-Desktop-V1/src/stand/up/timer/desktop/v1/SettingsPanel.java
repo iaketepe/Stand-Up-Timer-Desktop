@@ -12,12 +12,21 @@ package stand.up.timer.desktop.v1;
 public class SettingsPanel extends javax.swing.JPanel {
 
     private CardSwitch cSwitch;
+    private StandUpTimer timer;
+    
     /**
      * Creates new form SettingsPanel
      */
-    public SettingsPanel(CardSwitch cs) {
+    public SettingsPanel(CardSwitch cs, StandUpTimer timer) {
         initComponents();
         this.cSwitch = cs;
+        this.timer = timer;
+        volumeSlider.addChangeListener(e -> {
+            int value = volumeSlider.getValue();
+            this.timer.changeVolume(value);
+            volumeLabel.setText("Volume: " + value + "%");
+            
+        });
     }
 
     /**
@@ -30,6 +39,9 @@ public class SettingsPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         back = new javax.swing.JButton();
+        volumeSlider = new javax.swing.JSlider();
+        volumeLabel = new javax.swing.JLabel();
+        idLabel = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -41,6 +53,15 @@ public class SettingsPanel extends javax.swing.JPanel {
             }
         });
         add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 6, 77, 32));
+        add(volumeSlider, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 130, -1, -1));
+
+        volumeLabel.setText("Volume: 50%");
+        add(volumeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+
+        idLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        idLabel.setText("Settings");
+        idLabel.setVerifyInputWhenFocusTarget(false);
+        add(idLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 87, 97, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
@@ -50,5 +71,8 @@ public class SettingsPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
+    private javax.swing.JLabel idLabel;
+    private javax.swing.JLabel volumeLabel;
+    private javax.swing.JSlider volumeSlider;
     // End of variables declaration//GEN-END:variables
 }

@@ -31,7 +31,7 @@ public class CountDownEngine {
             timerDisplay.updateDisplayVal(formatTime(i));
             // Play sfx after countdown
             if (sfx != null && i == 0) {
-                SoundPlayer.playSound(sfx);
+                SoundPlayer.playSound(sfx, volume);
             }
             Thread.sleep(1000); // wait 1 second
         }

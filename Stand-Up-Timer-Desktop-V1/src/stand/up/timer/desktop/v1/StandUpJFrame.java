@@ -23,7 +23,7 @@ public class StandUpJFrame extends javax.swing.JFrame implements CardSwitch {
     public StandUpJFrame() {
         //initComponents();
         homePanel = new HomePanel(this);
-        settingsPanel = new SettingsPanel(this);
+        settingsPanel = new SettingsPanel(this, homePanel.timer);
         
         cardLayout = new CardLayout();
         cards = new JPanel(cardLayout);
