@@ -15,7 +15,7 @@ public class TimerSettings {
     String sfx = "alarmsfx.wav";
     
     public TimerSettings()  {
-        this.studyTime = Duration.ofSeconds(25); //10
+        this.studyTime = Duration.ofMinutes(25); //10
         this.breakTime = Duration.ofSeconds(25);
         isLoop = false;
         volume = 50;
@@ -52,8 +52,9 @@ public class TimerSettings {
                     throw new IllegalArgumentException("Unsupported format");
                 }
             } catch (Exception e) {
-                System.out.println("ERROR Incorrect String Format: " + e.getMessage());
-                return Duration.ZERO;  // or throw, or return null as per your design
+                //System.out.println("ERROR Incorrect String Format: " + e.getMessage());
+                //return Duration.ZERO;
+                throw new IllegalArgumentException("ERROR Incorrect String Format");
             }
     }
     

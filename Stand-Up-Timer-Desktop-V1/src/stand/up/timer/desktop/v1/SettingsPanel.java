@@ -13,6 +13,7 @@ public class SettingsPanel extends javax.swing.JPanel {
 
     private CardSwitch cSwitch;
     private StandUpTimer timer;
+    private javax.swing.Timer notificationTimer;
     
     /**
      * Creates new form SettingsPanel
@@ -21,8 +22,6 @@ public class SettingsPanel extends javax.swing.JPanel {
         initComponents();
         this.cSwitch = cs;
         this.timer = timer;
-        sittingField.setText(timer.showSittingTime());
-        standingField.setText(timer.showStandingTime());
         volumeSlider.addChangeListener(e -> {
             int value = volumeSlider.getValue();
             this.timer.changeVolume(value);
@@ -116,17 +115,45 @@ public class SettingsPanel extends javax.swing.JPanel {
     private void sittingFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sittingFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_sittingFieldActionPerformed
+    private void showNotification(String message) {
+        notificationLabel.setText(message);
 
+        if (notificationTimer != null && notificationTimer.isRunning()) {
+            notificationTimer.stop();
+        }
+
+        notificationTimer = new javax.swing.Timer(3000, e -> notificationLabel.setText(""));
+        notificationTimer.setRepeats(false);
+        notificationTimer.start();
+    }
     private void sittingConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sittingConfirmActionPerformed
         String value = sittingField.getText();
-        timer.changeSittingTime(value);
+        try {
+            timer.changeSittingTime(value);
+            showNotification("Sitting time is set.");
+        } catch (Exception e) {
+            showNotification("Error: Sitting time must be in HH:MM:SS");
+        }
     }//GEN-LAST:event_sittingConfirmActionPerformed
 
     private void standingConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standingConfirmActionPerformed
         String value = standingField.getText();
-        timer.changeStandingTime(value);
+        try {
+            timer.changeStandingTime(value);
+            showNotification("Sitting time is set.");
+        } catch (Exception e) {
+            showNotification("Error: Standing time must be in HH:MM:SS");
+        }
     }//GEN-LAST:event_standingConfirmActionPerformed
 
+    public void refreshInputFields() {
+        sittingField.setText(timer.showSittingTime());
+        standingField.setText(timer.showStandingTime());
+    }
+    
+    public void clearNotifications() {
+        notificationLabel.setText("");
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;

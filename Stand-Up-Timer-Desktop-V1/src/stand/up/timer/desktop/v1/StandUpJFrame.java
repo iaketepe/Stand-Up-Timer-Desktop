@@ -30,6 +30,7 @@ public class StandUpJFrame extends javax.swing.JFrame implements CardSwitch {
     
     public StandUpJFrame() {
         //initComponents();
+        super("Stand Up Timer");
         homePanel = new HomePanel(this);
         settingsPanel = new SettingsPanel(this, homePanel.timer);
         
@@ -38,7 +39,7 @@ public class StandUpJFrame extends javax.swing.JFrame implements CardSwitch {
         
         cards.add(homePanel, "home");
         cards.add(settingsPanel, "settings");
-        setTitle("Stand Up Timer");
+        
         getContentPane().removeAll();
         getContentPane().setPreferredSize(new Dimension(400,300));
         getContentPane().add(cards);
@@ -155,6 +156,11 @@ public class StandUpJFrame extends javax.swing.JFrame implements CardSwitch {
     @Override
     public void showPanel(String panelName) {
         cardLayout.show(cards, panelName);
+        
+        if ("settings".equals(panelName)) {
+            settingsPanel.refreshInputFields();
+            settingsPanel.clearNotifications();
+        }
     }
 
 
