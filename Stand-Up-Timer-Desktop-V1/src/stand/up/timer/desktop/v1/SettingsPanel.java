@@ -79,7 +79,7 @@ public class SettingsPanel extends javax.swing.JPanel {
         add(sittingLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
 
         standingField.setText("hh:mm:ss");
-        add(standingField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 190, -1));
+        add(standingField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 155, 190, -1));
 
         sittingField.setText("hh:mm:ss");
         sittingField.addActionListener(new java.awt.event.ActionListener() {
@@ -87,7 +87,7 @@ public class SettingsPanel extends javax.swing.JPanel {
                 sittingFieldActionPerformed(evt);
             }
         });
-        add(sittingField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 190, -1));
+        add(sittingField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 115, 190, -1));
 
         standingConfirm.setText("Save");
         standingConfirm.addActionListener(new java.awt.event.ActionListener() {
@@ -95,7 +95,7 @@ public class SettingsPanel extends javax.swing.JPanel {
                 standingConfirmActionPerformed(evt);
             }
         });
-        add(standingConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, -1, 24));
+        add(standingConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 155, -1, 24));
 
         sittingConfirm.setText("Save");
         sittingConfirm.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +103,7 @@ public class SettingsPanel extends javax.swing.JPanel {
                 sittingConfirmActionPerformed(evt);
             }
         });
-        add(sittingConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, 24));
+        add(sittingConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 115, -1, 24));
 
         notificationLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         add(notificationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 340, 20));
