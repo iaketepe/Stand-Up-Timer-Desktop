@@ -5,8 +5,16 @@
  */
 package stand.up.timer.desktop.v1;
 //import java.util.Timer;
+import java.awt.AWTException;
 import java.awt.CardLayout;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.MenuItem;
+import java.awt.PopupMenu;
+import java.awt.SystemTray;
+import java.awt.Toolkit;
+import java.awt.TrayIcon;
+import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
@@ -30,7 +38,7 @@ public class StandUpJFrame extends javax.swing.JFrame implements CardSwitch {
         
         cards.add(homePanel, "home");
         cards.add(settingsPanel, "settings");
-        
+        setTitle("Stand Up Timer");
         getContentPane().removeAll();
         getContentPane().setPreferredSize(new Dimension(400,300));
         getContentPane().add(cards);
@@ -41,11 +49,59 @@ public class StandUpJFrame extends javax.swing.JFrame implements CardSwitch {
         
         cardLayout.show(cards, "home");
         
+        setupSystemTray();
         
     }
     
     
+   private void setupSystemTray() {
+        if (!SystemTray.isSupported()) return;
 
+        SystemTray tray = SystemTray.getSystemTray();
+        //Image image = Toolkit.getDefaultToolkit().getImage("icon.png");
+        PopupMenu popup = new PopupMenu();
+        MenuItem openItem = new MenuItem("Open");
+        MenuItem exitItem = new MenuItem("Exit");
+        popup.add(openItem);
+        popup.add(exitItem);
+
+        //Image trayImage = new Image("icon.png"); //new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB); 
+        Image trayImage = Toolkit.getDefaultToolkit().getImage(getClass().getResource("icon.png"));
+        TrayIcon trayIcon = new TrayIcon(trayImage, "Stand Up Timer", popup);
+        trayIcon.setImageAutoSize(true);
+
+        // Restore window on tray icon click
+        trayIcon.addActionListener(e -> {
+            this.setVisible(true);
+            this.setExtendedState(NORMAL);
+            tray.remove(trayIcon);
+        });
+
+        // Open menu item
+        openItem.addActionListener(e -> {
+            this.setVisible(true);
+            this.setExtendedState(NORMAL);
+            tray.remove(trayIcon);
+        });
+
+        // Exit menu item
+        exitItem.addActionListener(e -> {
+            tray.remove(trayIcon);
+            System.exit(0);
+        });
+
+        // Minimize to tray
+        this.addWindowStateListener(e -> {
+            if (e.getNewState() == ICONIFIED) {
+                try {
+                    tray.add(trayIcon);
+                    this.setVisible(false);
+                } catch (AWTException ex) {
+                    ex.printStackTrace();
+                }
+            }
+        });
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
