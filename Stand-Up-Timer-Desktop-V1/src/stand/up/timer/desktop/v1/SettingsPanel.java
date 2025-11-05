@@ -140,7 +140,7 @@ public class SettingsPanel extends javax.swing.JPanel {
         String value = standingField.getText();
         try {
             timer.changeStandingTime(value);
-            showNotification("Sitting time is set.");
+            showNotification("Standing time is set.");
         } catch (Exception e) {
             showNotification("Error: Standing time must be in HH:MM:SS");
         }

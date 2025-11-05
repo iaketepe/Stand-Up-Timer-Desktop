@@ -11,7 +11,7 @@ public class TimerSettings {
     Duration breakTime;
     boolean isLoop;
     int volume;
-    String[] studyBreak = {"Study Time","Break Time"};
+    String[] studyBreak = {"Sitting Time","Stand Up Time"};
     String sfx = "alarmsfx.wav";
     
     public TimerSettings()  {
