@@ -21,6 +21,8 @@ public class SettingsPanel extends javax.swing.JPanel {
         initComponents();
         this.cSwitch = cs;
         this.timer = timer;
+        sittingField.setText(timer.showSittingTime());
+        standingField.setText(timer.showStandingTime());
         volumeSlider.addChangeListener(e -> {
             int value = volumeSlider.getValue();
             this.timer.changeVolume(value);
@@ -40,8 +42,15 @@ public class SettingsPanel extends javax.swing.JPanel {
 
         back = new javax.swing.JButton();
         volumeSlider = new javax.swing.JSlider();
-        volumeLabel = new javax.swing.JLabel();
+        standingLabel = new javax.swing.JLabel();
         idLabel = new javax.swing.JLabel();
+        volumeLabel = new javax.swing.JLabel();
+        sittingLabel = new javax.swing.JLabel();
+        standingField = new javax.swing.JTextField();
+        sittingField = new javax.swing.JTextField();
+        standingConfirm = new javax.swing.JButton();
+        sittingConfirm = new javax.swing.JButton();
+        notificationLabel = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -53,25 +62,82 @@ public class SettingsPanel extends javax.swing.JPanel {
             }
         });
         add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 6, 77, 32));
-        add(volumeSlider, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 130, -1, -1));
+        add(volumeSlider, new org.netbeans.lib.awtextra.AbsoluteConstraints(105, 200, -1, -1));
 
-        volumeLabel.setText("Volume: 50%");
-        add(volumeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
+        standingLabel.setText("Standing Time:");
+        add(standingLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
 
         idLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         idLabel.setText("Settings");
         idLabel.setVerifyInputWhenFocusTarget(false);
         add(idLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 87, 97, -1));
+
+        volumeLabel.setText("Volume: 50%");
+        add(volumeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
+
+        sittingLabel.setText("Sitting Time:");
+        add(sittingLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+
+        standingField.setText("hh:mm:ss");
+        add(standingField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 160, 190, -1));
+
+        sittingField.setText("hh:mm:ss");
+        sittingField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sittingFieldActionPerformed(evt);
+            }
+        });
+        add(sittingField, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 190, -1));
+
+        standingConfirm.setText("Save");
+        standingConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                standingConfirmActionPerformed(evt);
+            }
+        });
+        add(standingConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, -1, 24));
+
+        sittingConfirm.setText("Save");
+        sittingConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sittingConfirmActionPerformed(evt);
+            }
+        });
+        add(sittingConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, -1, 24));
+
+        notificationLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        add(notificationLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 340, 20));
     }// </editor-fold>//GEN-END:initComponents
 
     private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
         cSwitch.showPanel("home");
     }//GEN-LAST:event_backActionPerformed
 
+    private void sittingFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sittingFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_sittingFieldActionPerformed
+
+    private void sittingConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sittingConfirmActionPerformed
+        String value = sittingField.getText();
+        timer.changeSittingTime(value);
+    }//GEN-LAST:event_sittingConfirmActionPerformed
+
+    private void standingConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_standingConfirmActionPerformed
+        String value = standingField.getText();
+        timer.changeStandingTime(value);
+    }//GEN-LAST:event_standingConfirmActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back;
     private javax.swing.JLabel idLabel;
+    private javax.swing.JLabel notificationLabel;
+    private javax.swing.JButton sittingConfirm;
+    private javax.swing.JTextField sittingField;
+    private javax.swing.JLabel sittingLabel;
+    private javax.swing.JButton standingConfirm;
+    private javax.swing.JTextField standingField;
+    private javax.swing.JLabel standingLabel;
     private javax.swing.JLabel volumeLabel;
     private javax.swing.JSlider volumeSlider;
     // End of variables declaration//GEN-END:variables

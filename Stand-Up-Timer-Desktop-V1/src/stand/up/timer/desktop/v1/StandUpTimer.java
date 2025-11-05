@@ -62,8 +62,22 @@ public class StandUpTimer{
     }
     
     public void changeVolume(int volume) {
-        timerSettings.setVolume(volume);   
-        System.out.println("volume changed");
+        timerSettings.setVolume(volume);
+    }
+    
+    
+    public void changeSittingTime(String time) {
+        timerSettings.setSittingTime(time);
+    }
+    public void changeStandingTime(String time) {
+        timerSettings.setStandingTime(time);
+    }
+    
+    public String showSittingTime() {
+        return timerSettings.getSittingTime();
+    }
+    public String showStandingTime() {
+        return timerSettings.getStandingTime();
     }
     
 }

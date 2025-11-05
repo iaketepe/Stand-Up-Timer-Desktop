@@ -29,19 +29,20 @@ public class TimerSettings {
     }
     
     public TimerSettings(String studyTime, String breakTime) {
-        this.studyTime = StringtoDuration(studyTime);
-        this.breakTime = StringtoDuration(breakTime);
+        this.studyTime = stringtoDuration(studyTime);
+        this.breakTime = stringtoDuration(breakTime);
         isLoop = false;
         volume = 50;
     }
 
-    public Duration StringtoDuration(String time) {
+    public Duration stringtoDuration(String time) {
             try {
+                time = time.trim();
                 if (time.startsWith("P") || time.startsWith("p")) {
                     // ISO-8601 duration notation starts with 'P'
                     return Duration.parse(time);
                 } else if (time.matches("\\d{1,2}:\\d{2}:\\d{2}")) {
-                    // Matches HH:mm:ss format
+                    // Matches hh:mm:ss format
                     String[] parts = time.split(":");
                     int h = Integer.parseInt(parts[0]);
                     int m = Integer.parseInt(parts[1]);
@@ -54,6 +55,22 @@ public class TimerSettings {
                 System.out.println("ERROR Incorrect String Format: " + e.getMessage());
                 return Duration.ZERO;  // or throw, or return null as per your design
             }
+    }
+    
+    public String durationToString(Duration d) {
+        String time = "00:00:00";
+        try {
+            if(d == null) return time;
+            
+            long hours = d.toHours();
+            long minutes = d.toMinutes() % 60;
+            long seconds = d.getSeconds() % 60;
+
+            time = String.format("%02d:%02d:%02d", hours, minutes, seconds);
+        } catch (Exception e) {
+            System.out.println("Error incorrect format: " + e.getMessage());
+        }
+        return time;
     }
 
     public Duration getStudy(){
@@ -83,6 +100,26 @@ public class TimerSettings {
         else {
             volume = vol;
         }
+    }
+    
+    public void setSittingTime(String time) {
+        Duration d = stringtoDuration(time);
+        this.studyTime = d;
+    }
+    
+    public void setStandingTime(String time) {
+        Duration d = stringtoDuration(time);
+        this.breakTime = d;
+    }
+    
+    public String getSittingTime() {
+        String time = durationToString(this.studyTime);
+        return time;
+    }
+    
+    public String getStandingTime() {
+        String time = durationToString(this.breakTime);
+        return time;
     }
     
     public String[] getTimeLabel() {
